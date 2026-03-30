@@ -1,0 +1,67 @@
+---
+title: "ST_512-homework6"
+format: pdf
+author: "Lindsay Dodson"
+---
+```{r}
+#| label: load-packages
+#| message: false
+#| warning: false
+
+library(tidyverse)
+```
+
+
+
+## Question 1
+
+```{r}
+beer<- read.csv("beer_data.csv")
+```
+
+
+**a**
+
+$H_0: \sigma^2_a=0$
+
+$H_A: \sigma^2_a>0$
+
+```{r}
+MSa<- 170.91
+MSe<- 0.72
+dfa<- 5
+dfe<-42
+n<- 8
+
+f_val<-MSa/MSe
+1-pf(f_val, dfa, dfe)
+```
+The variation in sodium is due to brand as seen through p=2e-16<0.05.
+
+
+
+**b**
+
+```{r}
+beer|>
+  group_by(brand) |>
+  summarise("avg_sodium"=mean(sodium))
+```
+The mean sodium for Brand 1 is 23.6375 and Brand 2 is 10.6750.
+
+
+**c**
+
+$\hat{\sigma^2} = 0.72$
+
+```{r}
+(MSa-MSe)/n
+```
+
+$\hat{\sigma^2_\mu} = 21.27$
+
+```{r}
+21.27/(21.27+0.72)
+```
+
+97% of the variance in sodium in beer is associated with the brand of beer.
