@@ -3,6 +3,7 @@ title: "ST_512-homework6"
 format: pdf
 author: "Lindsay Dodson"
 ---
+
 ```{r}
 #| label: load-packages
 #| message: false
@@ -11,14 +12,11 @@ author: "Lindsay Dodson"
 library(tidyverse)
 ```
 
-
-
 ## Question 1
 
 ```{r}
 beer<- read.csv("beer_data.csv")
 ```
-
 
 **a**
 
@@ -36,9 +34,8 @@ n<- 8
 f_val<-MSa/MSe
 1-pf(f_val, dfa, dfe)
 ```
-The variation in sodium is due to brand as seen through p=2e-16<0.05.
 
-
+The variation in sodium is due to brand as seen through p=2e-16\<0.05.
 
 **b**
 
@@ -47,8 +44,8 @@ beer|>
   group_by(brand) |>
   summarise("avg_sodium"=mean(sodium))
 ```
-The mean sodium for Brand 1 is 23.6375 and Brand 2 is 10.6750.
 
+The mean sodium for Brand 1 is 23.6375 and Brand 2 is 10.6750.
 
 **c**
 
@@ -65,3 +62,63 @@ $\hat{\sigma^2_\mu} = 21.27$
 ```
 
 97% of the variance in sodium in beer is associated with the brand of beer.
+
+## Question 2
+
+| source           | df  | SS   | MS     | F-va  |
+|------------------|-----|------|--------|-------|
+| rater            | 7   | 1641 | 234.43 | 5.019 |
+| product          | 4   | 892  | 223    | 4.774 |
+| interaction R\*P | 28  | 1308 | 46.71  | 6.36  |
+| error            | 120 | 881  | 7.34   |       |
+
+$\hat{\sigma^2}=7.34$
+
+$\hat{\sigma^2_{\alpha\beta}}=\frac{46.71-7.34}{4}=9.843$
+
+$\hat{\sigma^2_\alpha}=\frac{234.43-46.71}{5*4}=9.386$
+
+$\hat{\sigma^2_\beta}=\frac{223-46.71}{8*4}=5.509$
+
+## Question 3
+
+**a**
+
+| source      | df  | SS       | MS     | F-val  | p-val  |
+|-------------|-----|----------|--------|--------|--------|
+| location    | 1   | 1.30     | 1.30   | 0.0119 | 0.913  |
+| player      | 9   | 3879.30  | 431.03 | 11.99  | 0.0005 |
+| interaction | 9   | 323.67   | 35.96  | 0.328  | 0.965  |
+| error       | 144 | 15787.29 | 109.63 |        |        |
+| total       | 339 | 19991.56 |        |        |        |
+
+```{r}
+1-pf(0.0119,1,144)
+1-pf(11.99,9,9)
+1-pf(0.328,9,144)
+```
+
+**b**
+
+There is an interaction between player and location as seen through $\sigma^2_{\alpha\beta}=35.96 > 0$
+
+**c**
+
+There is not a location main effect as seen through p=0.913>0.05.
+
+**d**
+
+There is a player main effect as seen through $\sigma^2_\beta= 431.03 > 0$
+
+**e**
+
+$\hat{\sigma^2_{\alpha\beta}}=\frac{35.96-109.63}{17}=-4.33$
+
+$\hat{\sigma^2_\beta}=\frac{431.03-109.63}{17*2}=9.45$
+
+$\hat{\sigma^2}=109.63$
+
+## Question 4
+
+
+
